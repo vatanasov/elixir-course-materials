@@ -1,0 +1,57 @@
+* Basic Linux commands
+  | Command                 | What does it do                                                                         | Examples                                                              |
+  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | pwd                     | Print Working Directory                                                                 | prints the name of the current directory                              |
+  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | cd <directory-name>     | Change Directory to specified directory                                                 | 'cd ~' - go to your "Home" directory                                  |
+  |                         |                                                                                         | 'cd lib' - go to the "lib" directory, found in the current directory  |
+  |                         |                                                                                         | 'cd -' - go to the previous directory                                 |
+  |                         |                                                                                         | 'cd ..' - go "Up" from the current directory                          |
+  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | ls -la                  | List current directory contents in a list form                                          | 'ls -la'                                                              |
+  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | mkdir <directory-name>  | Creates a directory with the supplied name                                              | 'mkdir new_project` - creates a directory with the name "new_project" |
+  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | rmdir <directory-name>  | Removes a directory with the supplied name. The directory must be empty!                | 'rmdir new_project' - removes a directory with the name "new_project" |
+  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | rm -rf <directory-name> | Removes a directory with all of its content recursively without asking for confirmation | 'rm -rf new_project'                                                  |
+  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | rm <file-name>          | Removes a file                                                                          | 'rm file.txt' - removes a file with the name "file.txt"               |
+  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+* Emacs commands
+** Legend
+   - C (control, Ctrl)
+   - M (meta, Alt)
+   - C-p (Ctrl-p, press "p", while holding down Ctrl)
+   - C-c x (Press "c" while holding down Ctrl, release Ctrl and press "x")
+   - SPC (Space key)
+** Keybindings
+  | Keybinding | What it does                                                                   |
+  |------------+--------------------------------------------------------------------------------|
+  | ↑, C-p     | Move one line above                                                            |
+  | ↓, C-n     | Move one line below                                                            |
+  | ←, C-b     | Move one char backwards                                                        |
+  | →, C-f     | Move one char forwards                                                         |
+  | C-x C-f    | Open file                                                                      |
+  | C-x C-s    | Save buffer to file (Save file)                                                |
+  | C-SPC, C-@ | Set mark (Similar to pressing the left button on the mouse and start dragging) |
+  | C-a        | Go to beginning of line                                                        |
+  | C-e        | Go to end of line                                                              |
+  | C-/        | Undo                                                                           |
+  | M-w        | Copy                                                                           |
+  | C-w        | Cut                                                                            |
+  | C-y        | Yank ("Paste")                                                                 |
+  | C-s        | Search                                                                         |
+  | M-f        | Move one word forwards                                                         |
+  | M-b        | Move one word backwards                                                        |
+  | M-v        | previous screen (PageUp)                                                       |
+  | C-v        | next screen (PageDown)                                                         |
+  | M-<        | Beginning of buffer ("File")                                                   |
+  | M->        | End of buffer ("File")                                                         |
+  | C-g        | Interrupt whatever command you have started                                    |
+
+  To invoke the interactive emacs tutorial, issue "C-h t", which would start the tutorial.
+
+* Homework
+  - Create a github account (https://github.com/)
+  - Do the tasks in the file
