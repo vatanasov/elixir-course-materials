@@ -1,23 +1,23 @@
 * Basic Linux commands
-  | Command                 | What does it do                                                                         | Examples                                                              |
-  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
-  | pwd                     | Print Working Directory                                                                 | prints the name of the current directory                              |
-  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
-  | cd <directory-name>     | Change Directory to specified directory                                                 | 'cd ~' - go to your "Home" directory                                  |
-  |                         |                                                                                         | 'cd lib' - go to the "lib" directory, found in the current directory  |
-  |                         |                                                                                         | 'cd -' - go to the previous directory                                 |
-  |                         |                                                                                         | 'cd ..' - go "Up" from the current directory                          |
-  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
-  | ls -la                  | List current directory contents in a list form                                          | 'ls -la'                                                              |
-  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
-  | mkdir <directory-name>  | Creates a directory with the supplied name                                              | 'mkdir new_project` - creates a directory with the name "new_project" |
-  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
-  | rmdir <directory-name>  | Removes a directory with the supplied name. The directory must be empty!                | 'rmdir new_project' - removes a directory with the name "new_project" |
-  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
-  | rm -rf <directory-name> | Removes a directory with all of its content recursively without asking for confirmation | 'rm -rf new_project'                                                  |
-  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
-  | rm <file-name>          | Removes a file                                                                          | 'rm file.txt' - removes a file with the name "file.txt"               |
-  |-------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | Command                   | What does it do                                                                         | Examples                                                              |
+  |---------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | =pwd=                     | Print Working Directory                                                                 | prints the name of the current directory                              |
+  |---------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | =cd <directory-name>=     | Change Directory to specified directory                                                 | 'cd ~' - go to your "Home" directory                                  |
+  |                           |                                                                                         | 'cd lib' - go to the "lib" directory, found in the current directory  |
+  |                           |                                                                                         | 'cd -' - go to the previous directory                                 |
+  |                           |                                                                                         | 'cd ..' - go "Up" from the current directory                          |
+  |---------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | =ls -la=                  | List current directory contents in a list form                                          | 'ls -la'                                                              |
+  |---------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | =mkdir <directory-name>=  | Creates a directory with the supplied name                                              | 'mkdir new_project` - creates a directory with the name "new_project" |
+  |---------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | =rmdir <directory-name>=  | Removes a directory with the supplied name. The directory must be empty!                | 'rmdir new_project' - removes a directory with the name "new_project" |
+  |---------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | =rm -rf <directory-name>= | Removes a directory with all of its content recursively without asking for confirmation | 'rm -rf new_project'                                                  |
+  |---------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+  | =rm <file-name>=          | Removes a file                                                                          | 'rm file.txt' - removes a file with the name "file.txt"               |
+  |---------------------------+-----------------------------------------------------------------------------------------+-----------------------------------------------------------------------|
 * Emacs commands
 ** Legend
    - C (control, Ctrl)
