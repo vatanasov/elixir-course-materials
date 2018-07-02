@@ -49,6 +49,7 @@
   | M-<        | Beginning of buffer ("File")                                                   |
   | M->        | End of buffer ("File")                                                         |
   | C-g        | Interrupt whatever command you have started                                    |
+  | M-h        | Mark whole paragraph                                                           |
 
   To invoke the interactive emacs tutorial, issue "C-h t", which would start the tutorial.
 
