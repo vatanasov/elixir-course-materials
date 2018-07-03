@@ -50,6 +50,7 @@
   | M->        | End of buffer ("File")                                                         |
   | C-g        | Interrupt whatever command you have started                                    |
   | M-h        | Mark whole paragraph                                                           |
+  | C-x 1      | Close all other windows, except the one you are currently on                   |
 
   To invoke the interactive emacs tutorial, issue "C-h t", which would start the tutorial.
 
