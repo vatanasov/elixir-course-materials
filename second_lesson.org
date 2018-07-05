@@ -1,0 +1,164 @@
+* Exercises
+  - Go to your home directory;
+  - Create a directory named "lesson_2"
+  - In it (the directory named "lesson_2") create a file "file_for_lesson_2.txt"
+  - Test whether everything is as requested after each command, issuing the command that lists the content of the current directory
+  - Remove the directory "lesson_2"
+  - Open emacs
+  - Create a file "skilzz.txt" in your home directory
+  - Write "Done" in it
+* Exercises 2
+  - Go to the directory with your homework
+  - Issue "iex example_program.ex"
+  - Try each of the functions by issuing them with the format "<ModuleName>.<function_name>(<first-argument>, <second-argument>....)
+     (For example "FirstExercise.add_two_numbers(5, 6)"
+* Elixir basic commands
+  | Command                   | What does it do                                                          | Examples                |
+  |---------------------------+--------------------------------------------------------------------------+-------------------------|
+  | iex                       | The Elixir REPL                                                          | 'iex'                   |
+  | mix new <name-of-project> | Creates a new project (in the current directory) with the specified name | 'mix new first_project' |
+  | iex -S mix                | Starts a REPL with the current project loaded in it                      | 'iex -S mix'            |
+* Pattern matching
+  The '=' operator is actually not assignment operator in Elixir. It is match operator.
+** Basic pattern matching 
+   #+BEGIN_SRC elixir
+     x = 5
+     5 = x
+     6 = x
+   #+END_SRC
+** List pattern matching
+   #+BEGIN_SRC elixir
+     list = [1, 2, 3]
+     [x, y, z] = list
+     [x, 2, 3] = list
+     [1, y, 3] = list
+     [x, 3] = list
+     [x, 6, 3] = list
+   #+END_SRC
+** Nested list pattern matching
+   #+BEGIN_SRC elixir
+     nested_list = [1, [2, 3], 4]
+   #+END_SRC
+*** Exercises:
+    - match "1" from the nested_list
+    - match "2" from the nested_list
+    - match all of the numbers in the nested list in one match
+    - which of the following will match:
+      #+BEGIN_SRC elixir
+        a = [1, 2, 3]
+        a = 4
+        4 = a
+        [a, b] = [ 1, 2, 3 ]
+        a = [ [ 1, 2, 3 ] ]
+        [a] = [ [ 1, 2, 3 ] ]
+        [[a]] = [ [ 1, 2, 3 ] ]
+      #+END_SRC
+** Ignoring values in pattern match
+   #+BEGIN_SRC elixir
+     [1, _, _] = [1, 2, 3]
+     [_, 2, _] = [1, 2, 3]
+     [x, _, _] = [1, 2, 3]
+     [x, _, z] = [1, :an_atom, "a string!"]
+     [x, _, z] = [1, 2, 3, 4]
+     [x, _, z] = [1, [2, 3], 4]
+   #+END_SRC
+** Variables bind once per match
+*** Exercises
+    - Which of this will match?
+      #+BEGIN_SRC elixir
+        [x, x] = [1, 1]
+        [x, x] = [2, 3]
+        [x, _, x] = [2, 3]
+        [x, z, x] = [2, 3, 2]
+        [x, 3, x] = [2, 3, 2]
+      #+END_SRC
+* Types
+  | Type    | Example        | Comment                                          |
+  |---------+----------------+--------------------------------------------------|
+  | atom    | :blue          |                                                  |
+  | integer | 6              |                                                  |
+  | float   | 6.3            |                                                  |
+  | string  | "Hello world!" |                                                  |
+  | boolean | true           |                                                  |
+  | nil     | nil            |                                                  |
+  | tuple   | {3, "Text"}    | The values of the tuple can be of different type |
+  | list    | [1, 2, 3]      | The values in the list must be of the same type  |
+
+  The list is not complete, more complex types will be introduced later
+
+** Exercises
+   - Create a tuple consisting of an atom ":ok" and string "Alice"
+   - Pattern match the string in a variable "first_name"
+   - Create a tuple consisting of three elements, an atom, an integer and a string
+   - Create a pattern to match integer and the string from the previous tuple in variables named "age" and "first_name"
+   - Make the pattern match only if the atom has a value ":ok"
+* Immutable data
+  - Data is never "mutated" (changed);
+  - For example, adding an element to the list does not change the existing list - it created a new one with the new element added;
+  - Similarly, removing an item from a list does not modify the list - the list persists, and a new one is created, without the specified item;
+  - Examples:
+
+  #+BEGIN_SRC elixir
+  list = [1, 2, 3, 4, 5, 6]
+  List.delete_at(list, 1)
+  list
+  #+END_SRC
+
+  #+BEGIN_SRC elixir
+  list = [1, 2, 3, 4, 5, 6]
+  list ++ [1]
+  list
+  #+END_SRC
+
+  #+BEGIN_SRC elixir
+  list = [1, 2, 3, 4, 5, 6]
+  list ++ [1]
+  List.delete_at(list, 1)
+  list
+  #+END_SRC
+
+* Basic git commands
+  | Command                              | What does it do                                                 | Examples                                          |
+  |--------------------------------------+-----------------------------------------------------------------+---------------------------------------------------|
+  | git clone <clone-url>                | Clones the specified repo in the current directory              | 'git clone https://github.com/elixir-lang/elixir' |
+  | git add .                            | Adds all of the changed files in the current project to staging | 'git add .'                                       |
+  | git commit -m <commit-message>       | Creates a new commit with that message                          | 'git commit -m "Initial commit"'                  |
+  | git push <which-repo> <which-branch> | Pushes to the specified parameters                              | 'git push origin master'                          |
+
+** Exercises
+   - Create a repo in your account
+   - Clone it locally
+   - Create a file named "initial.txt", that has the text "Learning git" in it
+   - Commit the file
+   - Push it to your github repo
+* Homework
+  - Copy the example program below in your editor. You will use it as 
+  #+BEGIN_SRC elixir
+    defmodule Homework do
+
+      def first_task() do
+        # Using a pattern match, assign "Alice" to a variable "first_name", and "Addison" to variable "last_name"
+        _ = {"Alice", "Addison"}
+
+        # Assign the number to the variable "age", and the letter to "sex"
+        _ = {32, "f"}
+
+        # Create a patter, that will fail if the first item of the tuple is anything other than "200"
+        _ = {200, "example data", :an_atom}
+
+        # From here on, do not use variables. All of these are heavily inspired by elixirkoans
+        _ = true
+        _ = !true
+        2 = 1 + _
+        4 = 2 / _
+        6 = 2 * _
+        3 > _
+        "hello world" = _ <> "world"
+        _ = [1, 2] ++ [:a, "b"]
+        _ = [1, 2, 3] -- [3]
+      end
+    end
+  #+END_SRC
+  - Create a new repo on github named "second_homework"
+  - Push that file there
+
