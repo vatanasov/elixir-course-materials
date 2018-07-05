@@ -161,4 +161,5 @@
   #+END_SRC
   - Create a new repo on github named "second_homework"
   - Push that file there
+  - Send a link to the repo to you course instructor
 
