@@ -1,0 +1,116 @@
+* Exercises
+  - Write a pattern to get "Alice" in variable named `first_name`, and 18 in variable named `age` from the following structure:
+    #+BEGIN_SRC elixir
+      [first_name: "Alice", age: 18]
+    #+END_SRC
+  - Write a pattern to get the same things from the following structure:
+    #+BEGIN_SRC elixir
+      {:ok, [%{first_name: "Alice", age: 18}, %{first_name: "Bob", age: 21}]}
+    #+END_SRC
+* Types (continued)
+** Keyword lists
+   Keyword lists are lists, that contain tuples, consisting of an atom (as the key) and another element (as the value)
+   They are usually used as named arguments in functions
+   #+BEGIN_SRC elixir
+     [{:key, "value"}]
+     # Which could be shorthanded as:
+     [key: "value"]
+   #+END_SRC
+
+   #+BEGIN_SRC elixir
+   [{:first_name, "Alice"}, {:last_name, "Hemingway"}] == [first_name: "Alice", last_name: "Hemingway"]
+   #+END_SRC
+** Maps
+   - Maps are collections of key and value pairs
+   #+BEGIN_SRC elixir
+     %{"key" => "value", "another_key" => 3, "third_key" => :atom}
+     %{[1, 2] => "value", {3, 4} => "another_value"}
+     %{:key => "value"}
+   #+END_SRC
+    
+   - Accessing maps
+     #+BEGIN_SRC elixir
+       person = %{:first_name => "Alice", :last_name = "Hemingway"}
+       person[:first_name]
+       # Only when the keys are atoms!
+       person.last_name
+     #+END_SRC
+   - Pattern matching maps
+     Maps can be partially pattern matched
+     #+BEGIN_SRC elixir
+     %{a: x, b: y} = %{a: "value", b: "value2"}
+     %{a: x} = %{a: "value", b: "value2"}
+     %{b: x} = %{a: "value", b: "value2"}
+     #What will this return:
+     %{} = %{a: "value", b: "value2"}
+     #+END_SRC
+* Anonymous functions 
+  #+BEGIN_SRC elixir
+    sum = fn (a,b) -> a + b end
+    sum.(1, 2)
+  #+END_SRC
+    
+  The dot is required, even if there are no parameters
+  #+BEGIN_SRC elixir
+    hello_world = fn -> IO.puts("Hello world") end
+    hello_world.()
+  #+END_SRC
+
+  You can pattern match the arguments:
+  #+BEGIN_SRC elixir
+    fn ([x, y]) -> x + y end
+    fn ({x, y}) -> x + y end
+  #+END_SRC
+    
+  For example, this is possible:
+  #+BEGIN_SRC elixir
+    complex = [1, 2, {3, 4}]
+    sum_complex = fn ([x, y, {z1, z2}]) -> x + y + z1 + z2 end
+    sum_complex.(complex)
+  #+END_SRC
+*** Exercises
+    Create functions that does the following:
+    | How it should be called                    | Result             |
+    |--------------------------------------------+--------------------|
+    | concatenate.("Hello", " World")            | "Hello World"      |
+    | power_of_two.(3)                           | 9                  |
+    | tuple_to_list.({1, 2, 3})                  | [1, 2, 3]          |
+    | transform.([2, 3], [4, 5])                 | [{2, 4}, {3, 5}]   |
+    | make_keyword_list({:a, :b, :c}, {1, 2, 3}) | [a: 1, b: 2, c: 3] |
+** Multiple bodies of anonymous function
+   Using pattern matching you can have several function bodies, depending on the type and content of the arguments passed:
+   #+BEGIN_SRC elixir
+     maybe_pluralize = fn
+       1 -> "person"
+       _ -> "people"
+     end
+     maybe_pluralize.(1)
+     maybe_pluralize.(5)
+   #+END_SRC
+
+   #+BEGIN_SRC elixir
+     example_http_call = {200, "Text"}
+     example_bad_http_call = {404, "Not found"}
+     is_it_ok = fn
+       {200, text} -> text
+       {_, error} -> "Error occurred: " <> error
+     end
+   #+END_SRC
+*** Exercises
+    - Create a function "length_of_tuple", that returns the number of elements in a tuple. If they are more than 4, return the string "Shouldn't you use list?"
+* Homework
+    - Write a function that takes three arguments. If the first two are zero, return “FizzBuzz.” If the first is zero, return “Fizz.” If the second is zero, return “Buzz.” Otherwise return the third argument.
+    - Examples
+      | Arguments    | Result     |
+      |--------------+------------|
+      | 0, 0, 5      | "FizzBuzz" |
+      | 0, 1, 2      | "Fizz"     |
+      | 1, 0, 2      | "Buzz"     |
+      | 1, 1, "Test" | "Test"     |
+  - Write a function that checks if list is empty. It should return "true" if it is, and "false" otherwise
+  - You have a map with the following structure:
+    #+BEGIN_SRC elixir
+      %{first_name: "Alice", second_name: "Hemingway", age: 20}
+    #+END_SRC
+    Write a function, that when receives that map, returns the string "Hello, Alice Hemingway!"
+  - Put the functions in a text file, and push it to your repo
