@@ -1,0 +1,90 @@
+* Functions as return values
+   #+BEGIN_SRC elixir
+     example = fn -> fn -> 2 + 2 end end
+     example.()
+   #+END_SRC
+
+   #+BEGIN_SRC elixir
+     sum_two_elements = fn
+       x -> fn
+         y -> x + y
+       end
+     end
+     sum_element_with_3 = sum_two_elements.(3)
+     sum_element_with_3.(4)
+   #+END_SRC
+* Exercises
+ - Write a function sentence, that takes either ".", "!", or "?". It should return a new function, that takes a second string and uses the suffix you already passed, and appends it to the second string.
+ #+BEGIN_SRC elixir
+   exclamation = sentence.("!")
+   exclamation.("This is a function")
+   # Should return "This is a function!"
+   wrong = sentence.("Something else")
+   wrong.("Another thing")
+   # Should return "You should have provided either '.', '!', or '?' "
+ #+END_SRC
+
+* Shorthand
+  #+BEGIN_SRC elixir
+    # Those are equivalent
+    fn x -> x + 2 end
+    &(&1 + 2)
+
+    fn x, y -> x + y end
+    &(&1 + &2)
+  #+END_SRC
+* Functions as arguments
+  Functions can also be passed as arguments:
+  #+BEGIN_SRC elixir
+    times_2 = fn x -> x * 2 end
+    times_3 = fn x -> x * 3 end
+    apply = fn (fun1, fun2, value) -> fun2.(fun1.(value)) end
+    apply.(times_2, times_3, 4)
+  #+END_SRC
+* Enum.map
+  Enum.map iterates through an enumerable(for example a list), and returns as new list, with the function supplied as the second argument applied to each of the elements in the enumerable
+  #+BEGIN_SRC elixir
+    list = [1,2,3]
+    Enum.map(list, fn num -> num * 2 end)
+    Enum.map(list, fn num -> num * num end)
+  #+END_SRC
+** Guess the result
+   #+BEGIN_SRC elixir
+     Enum.map([[1, 2, 3]], &length/1)
+     Enum.map([1, 2, 3], &length/1)
+   #+END_SRC
+
+
+** Exercises
+   Given a list with names, return a list of strings, in the form of "Hello, <name>!".
+   For example, ["Alice", "Bob"] should return ["Hello, Alice!", "Hello, Bob!"]
+* Enum.filter
+  Enum.filter receives an enumerable(for example a list), and a function (that returns either "true" or "false") and returns a list of the elements, returning "true" when the function is applied to them.
+  #+BEGIN_SRC elixir
+    Enum.filter([1, 2, 3, 4], fn num ->
+      if num > 2 do
+        true
+      else
+        false
+      end
+    end)
+
+    Enum.filter([1, 2, 3, 4], fn num -> num > 2 end)
+  #+END_SRC
+* Exercises
+  - Given a list of ages: `[21, 14, 32, 66, 17]`, using `Enum.filter` remove every age, that should not be allowed to go to the disco
+  - Given a list: `[%{name: "Alice Addison", age: 14}, %{name: "Bob Benetton", age: 21}, %{name: "Eve Elliot", age: 18}]` remove everyone, that should not be allowed to go to the disco
+* Homework
+  (Some of the tasks require you to use functions from the Elixir core library. Search for them!)
+
+  As always, create a repo(or use an existing one) and upload the solutions there.
+
+  - Given a list `["Alice Addison", "Bob Benetton"]`, you should (using `Enum.map`) return a list `[["Alice", "Addison"], ["Bob", "Benetton"]]`
+  - Given a list `[%{name: "Alice Addison", age: 14}, %{name: "Bob Benetton", age: 21}, %{name: "Eve Elliot", age: 18}]`, return the following list: `["Alice Addison: 14 years old", "Bob Benetton: 21 years old", "Eve Elliot: 18 years old"]`
+  - Given the list from the previous task, made an additional case for when the age is "1", then it should output "<name>: 1 year old"
+  - Given the following list: ["An example sentence", "Another sentence", "Third sentence"], remove every sentence that has at least one "a"
+  - Given the following matrix:
+    [[1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]] Double every element of it, preserving the structure. Make so that it doesn't matter what size the dimensions are.
+  - Given the matrix from the previous exercise, return only the even numbers, preserving the structure
