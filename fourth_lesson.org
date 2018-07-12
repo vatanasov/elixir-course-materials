@@ -13,16 +13,16 @@
      sum_element_with_3 = sum_two_elements.(3)
      sum_element_with_3.(4)
    #+END_SRC
-* Exercises
- - Write a function sentence, that takes either ".", "!", or "?". It should return a new function, that takes a second string and uses the suffix you already passed, and appends it to the second string.
- #+BEGIN_SRC elixir
-   exclamation = sentence.("!")
-   exclamation.("This is a function")
-   # Should return "This is a function!"
-   wrong = sentence.("Something else")
-   wrong.("Another thing")
-   # Should return "You should have provided either '.', '!', or '?' "
- #+END_SRC
+** Exercises
+  - Write a function sentence, that takes either ".", "!", or "?". It should return a new function, that takes a second string and uses the suffix you already passed, and appends it to the second string.
+  #+BEGIN_SRC elixir
+    exclamation = sentence.("!")
+    exclamation.("This is a function")
+    # Should return "This is a function!"
+    wrong = sentence.("Something else")
+    wrong.("Another thing")
+    # Should return "You should have provided either '.', '!', or '?' "
+  #+END_SRC
 
 * Shorthand
   #+BEGIN_SRC elixir
@@ -71,9 +71,9 @@
 
     Enum.filter([1, 2, 3, 4], fn num -> num > 2 end)
   #+END_SRC
-* Exercises
-  - Given a list of ages: `[21, 14, 32, 66, 17]`, using `Enum.filter` remove every age, that should not be allowed to go to the disco
-  - Given a list: `[%{name: "Alice Addison", age: 14}, %{name: "Bob Benetton", age: 21}, %{name: "Eve Elliot", age: 18}]` remove everyone, that should not be allowed to go to the disco
+** Exercises
+   - Given a list of ages: `[21, 14, 32, 66, 17]`, using `Enum.filter` remove every age, that should not be allowed to go to the disco
+   - Given a list: `[%{name: "Alice Addison", age: 14}, %{name: "Bob Benetton", age: 21}, %{name: "Eve Elliot", age: 18}]` remove everyone, that should not be allowed to go to the disco
 * Homework
   (Some of the tasks require you to use functions from the Elixir core library. Search for them!)
 
