@@ -1,0 +1,135 @@
+* Tail-call recursion
+  #+BEGIN_SRC elixir
+    def guess([], acc), do: acc
+    def guess([head | tail], acc), do: guess(tail, [head + 1 | acc])
+  #+END_SRC
+
+** Exercises
+   - Do the previous exercises, but make them tail-call
+
+* Reduce
+  #+BEGIN_SRC elixir
+    defmodule My do
+      def reduce([], acc, _), do: acc
+      def reduce([head | tail], acc, func), do: reduce(tail, func.(head, acc), func)
+    end
+
+    My.reduce([1,2,3], 0, fn x, acc -> x + acc end)
+  #+END_SRC
+
+  The function from the Core library is named `Enum.reduce`.
+  #+BEGIN_SRC elixir
+    Enum.reduce([1,2,3], 0, fn x, acc -> x + acc end)
+  #+END_SRC
+
+  What `Enum.reduce` does, is aggregating all the values in a list to a single value. Bear in mind, that single value does not necessary means aggregating to a number, or a list. Single value could also be a list, a map, a tuple etc. Also the aggregated value doesn't need to "include" in itself all other values.
+   
+  If the second argument is not provided (`Enum.reduce/2` is called, instead of `Enum.reduce/3`), the first item in the list is taken as the initial value.
+
+  Examples:
+  #+BEGIN_SRC elixir
+    Enum.reduce([1, 2, 3], fn x, acc ->
+      if rem(x, 2) == 0 do
+        if x > acc, do: x, else: acc
+      else
+        acc
+      end
+    end)
+
+    # Largest even number
+  #+END_SRC
+
+  #+BEGIN_SRC elixir
+    Enum.reduce([1, 2, 3], [], fn x, acc ->
+      if x > 1, do: [x | acc], else: acc
+    end)
+
+    # All the numbers larger than 1
+  #+END_SRC
+
+** Exercises
+   Using `Enum.reduce`:
+   - on a list of numbers, calculate the product of all of them
+   - on a list of strings, concatenate all of them
+   - on a list of numbers, remove the odd ones
+
+* Guards
+  #+BEGIN_SRC elixir
+    def print(x) when is_atom(x) do
+      IO.puts("#{x} is an atom!")
+    end
+
+    def print(x) when is_integer(x) do
+      IO.puts("#{x} is an integer")
+    end
+
+    def print(x) when is_list(x) do
+      IO.puts("#{x} is a list")
+    end
+  #+END_SRC
+
+  #+BEGIN_SRC elixir
+    def double_if_even(x) when rem(x, 2) == 0 do
+      x * 2
+    end
+
+    def double_if_even(x) do
+      x
+    end
+  #+END_SRC
+
+  #+BEGIN_SRC elixir
+    def double_if_even_and_larger_than_5(x) when rem(x, 2) == 0 and x > 5 do
+      x * 2
+    end
+
+    def double_if_even_and_larger_than_5(x) do
+      x
+    end
+  #+END_SRC
+
+** Exercises
+   - Write a function, that tests if a list is empty, and returns `true`, `false`, or "This is not a list!"
+   - Write a recursive function, that calculates the sum of all even numbers in a list, using guards
+
+* Pipe operator (|>)
+  You need to double all elements of a list, and return a list with those of them, that became bigger than 10
+  #+BEGIN_SRC elixir
+    Enum.filter(Enum.map([1,2,3,4,5,6,7,8], fn x -> x * 2 end), fn x -> x > 10 end)
+  #+END_SRC
+
+  ... and now triple those
+  #+BEGIN_SRC elixir
+    Enum.map(Enum.filter(Enum.map([1,2,3,4,5,6,7,8], fn x -> x * 2 end), fn x -> x > 10 end), fn x -> x * 3 end)
+  #+END_SRC
+
+  ... with pipe:
+  #+BEGIN_SRC elixir
+    [1, 2, 3, 4, 5, 6, 7, 8]
+    |> Enum.map(fn x -> x * 2 end)
+    |> Enum.filter(fn x -> x > 10 end)
+    |> Enum.map(fn x -> x * 3 end)
+  #+END_SRC
+* Homework
+  1. Using `Enum.reduce`:
+   - on a list of numbers, return all of them doubled
+   - on a list of numbers, return a list, consisting of the even ones, doubled
+  2. The task is, to write a refrigerator application. It should be possible to add items to it, to remove items from it, to keep count of the number of products, that are the same:
+   - Write a module `Refrigerator`
+   - It should have a function `new`, that returns a new empty refrigerator, represented as an empty map
+   - It should have a function `add`, that takes a refrigerator, an item and count, and returns a new refrigerator, that has the count to the appropriate key in the map. Otherwise it should add a new key to the refrigerator.
+   - It should have a function `remove`, that takes a refrigerator, an item and count, and returns a new refrigerator, with the count removed from the key in the map. If the count is more than the number of items in the fridge, it should leave the item to 0
+
+    Example of usage:
+    #+BEGIN_SRC elixir
+      my_refrigerator = Refrigerator.new()
+      # %{}
+      my_refrigerator = Regrigerator.add(my_refrigerator, :apples, 2)
+      # %{apples: 2}
+      my_refrigerator = Regrigerator.add(my_refrigerator, :apples, 1)
+      # %{apples: 3}
+      my_refrigerator = Refrigerator.remove(my_refrigerator, :apples, 2)
+      # %{apples: 1}
+      my_refrigerator = Refrigerator.remove(my_refrigerator, :apples, 6)
+      # %{apples: 0}
+    #+END_SRC
