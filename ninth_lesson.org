@@ -1,0 +1,149 @@
+* Maps
+** Reminder
+  #+BEGIN_SRC elixir
+    map = %{name: "Alice", age: 18}
+  #+END_SRC
+ 
+** Operations with map
+  #+BEGIN_SRC elixir
+    map.name
+    # "Alice"
+    map.wrong
+    # Error
+    map[:name]
+    # "Alice"
+    map[:wrong]
+    # nil
+    Map.keys(map)
+    # [:name, :age]
+    Map.values(map)
+    # ["Alice", 18]
+    Map.drop(map, [:age])
+    # %{name: "Alice"}
+    Map.put(map, :sex, :female)
+    # %{name: "Alice", age: 18, sex: :female}
+    Map.has_key?(map, :sex)
+    # false
+    Map.merge(map, %{age: 20, sex: :female})
+    # %{name: "Alice", age: 20, sex: :female}
+  #+END_SRC
+
+** Pattern matching
+  #+BEGIN_SRC elixir
+    %{name: name} = map
+    %{name: "Alice"} = map
+    %{name: "Alice", age: age} = map
+    %{name: "Alice", age: 13} = map
+  #+END_SRC
+ 
+** Updating a map
+  #+BEGIN_SRC elixir
+    %{map | name: "Bob"}
+    # %{name: "Bob", age: 18}
+    %{map | work: "None"}
+    # Error
+  #+END_SRC
+
+
+
+* Structs
+  The struct is a map, that has a predefined set of keys, which must be atoms
+  #+BEGIN_SRC elixir
+    defmodule User do
+      defstruct [:name, :age, :sex]
+    end
+  #+END_SRC
+
+  #+BEGIN_SRC elixir
+    user = %User{name: "Alice", age: 18}
+    # %User{name: "Alice", age: 18, sex: nil}
+
+    %User{name: "Alice", occupation: "None"}
+    # Error
+
+    user.name
+    # "Alice"
+  #+END_SRC
+
+** Exercises
+   Guess what will happen on each of those lines:
+   #+BEGIN_SRC elixir
+     user = %User{name: "Alice", age: 18}
+
+     %{} = user
+     %User{} = user
+     %Person{} = user
+     %User{name: name} = user
+     %{name: name} = user
+     user = %{user | age: 21}
+     user = %{user | can_drink_beer?: true}
+   #+END_SRC
+
+** Default values
+   #+BEGIN_SRC elixir
+     defmodule User do
+       defstruct [name: "", age: 18, sex: :unknown]
+     end
+   #+END_SRC
+
+** Nested structures
+   #+BEGIN_SRC elixir
+     company = %{
+       ceo: %{name: "Alice Addison", age: 40},
+       coo: %{name: "Bob Sparkles", age: 32},
+       programmers: [
+         %{name: "Dave"},
+         %{name: "John"}
+       ]
+     }
+     get_in(company, [:ceo, :name])
+     # "Alice Addison"
+     put_in(company, [:ceo, :name], "Alice Addidaughter")
+     update_in(company,  [:ceo, :name], fn name -> String.replace(name, "son", "daughter") end)
+   #+END_SRC
+
+** Exercises
+   - From the previous data, extract the COO name;
+   - From the previous data extract the name of the first programmer
+   - Given the previous data, put "junior" in front of every developer name
+
+** Homework
+   - Implement a function, that when given a list and a function that returns boolean, checks if every element in the list, after getting the function applied to itself returns true
+     #+BEGIN_SRC elixir
+       all_true([1,2,3], fn x -> rem(x, 2) == 0 end)
+       # false
+       all_true([4,2,6], fn x -> rem(x, 2) == 0 end)
+       # true
+     #+END_SRC
+
+   - Implement a function, that when given a list and a function that returns boolean, checks if at least one element in the list, after getting the function applied to itself returns true
+     #+BEGIN_SRC elixir
+       any_true([1,2,3], fn x -> rem(x, 2) == 0 end)
+       # true
+       any_true([1,3,5], fn x -> rem(x, 2) == 0 end)
+       # false
+     #+END_SRC
+
+   - Implement a function, that given a list, an integer, and a value, returns the item, that is at the integer's position in the list, and if the list has less elements than the list, return the value
+
+   #+BEGIN_SRC elixir
+     get_element_at([1,2,3], 2, 100)
+     # 3
+
+     get_element_at([1,2,3], 4, 100)
+     # 100
+   #+END_SRC
+      
+   - Implement a function, that given a list and a function, returns the item from the list, that returns the biggest value, after given a function
+     #+BEGIN_SRC elixir
+       max_by(["test", "another", "big"], fn x -> String.lenght(x) end)
+       # "another"
+     #+END_SRC
+    
+   - Implement a function, that given a list and an integer (n), returns the first n elements from the list. If the length of the list is less than n, return the whole list
+     #+BEGIN_SRC elixir
+       take_first_n([1,2,3], 2)
+       # [1,2]
+       take_first_n([1,2,3], 540)
+       # [1,2,3]
+     #+END_SRC
