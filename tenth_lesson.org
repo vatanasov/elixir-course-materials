@@ -1,0 +1,60 @@
+* Exercises
+  - Implement a function, that when given a list and a symbol, creates a string, that contains all the elements in the list, joined by the symbol you provided
+    #+BEGIN_SRC elixir
+      my_join([1,2,3,4], ",")
+      # "1,2,3,4"
+    #+END_SRC
+
+* Comprehensions
+  Combines one or more collections, doing an operation on the combinations of values, possibly filtering them
+
+  #+BEGIN_SRC elixir
+    Enum.map([1,2,3,4], fn x -> x * 2 end)
+    for x <- [1,2,3,4], do: x * 2
+  #+END_SRC
+
+  #+BEGIN_SRC elixir
+    Enum.filter([1,2,3,4], fn x -> rem(x, 2) == 0 end)
+    for x <- [1,2,3,4], rem(x, 2) == 0, do: x
+  #+END_SRC
+
+  #+BEGIN_SRC elixir
+    [1,2,3,4]
+    |> Enum.filter(fn x -> rem(x, 2) == 0 end)
+    |> Enum.map(fn x -> x * 2 end)
+
+    for x <- [1,2,3,4], rem(x, 2) == 0, do: x * 2
+  #+END_SRC
+
+  #+BEGIN_SRC elixir
+    [1,2,3,4]
+    |> Enum.flat_map(fn x -> Enum.map([7,8,9], fn y -> x * y end) end)
+
+    for x <- [1,2,3,4], y <- [7,8,9], do: x * y
+  #+END_SRC
+
+** Exercises
+   - Write a comprehension, that given a list of strings, uppercases all of them
+   - Write a comprehension, that given a list of strings, returns a list of the uppercased version of the ones that are under 5 characters
+   - You have a list of titles, and list of names
+     #+BEGIN_SRC elixir
+       titles = ["Mr. ", "Mrs. "]
+       names = ["Ivan Georgiev", "Nikola Nikolov", "Antoaneta Velieva"]
+     #+END_SRC
+     Write a comprehension that combines each title with each name
+   - Build upon the previous comprehension, giving the "Mrs " title if the last name ends on "a", otherwise use the other one
+* Strings
+  Only double quoted strings are strings
+  Single quoted ones are character lists (charlists)
+  #+BEGIN_SRC elixir
+    example = 'test'
+    Enum.reverse(example)
+    example ++ ' another'
+  #+END_SRC
+
+** Exercises
+   - Why does ['test' | 'somethigns else'] is printed weirdly in IEX?
+
+* Homework
+  - create a working project, that has HTTPoison included, has a module "Dog", and a single function "get_dog_picture", that returns the json from this URL: https://dog.ceo/api/breeds/image/random
+    Hint: use mix.exs file, and the command "mix deps.get"
