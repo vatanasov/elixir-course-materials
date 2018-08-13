@@ -1,0 +1,61 @@
+https://elixir-lang.org/getting-started/processes.html
+
+Processes in elixir (and erlang) are not OS native processes - they are much more lightweight.
+
+#+BEGIN_SRC elixir
+  defmodule Example do
+    def code(message) do
+      IO.puts("Example message: #{message}")
+    end
+  end
+
+  iex> Example.code("test")
+  # iex> Example message: test
+  # iex> :ok
+  iex> spawn(Example, :code, ["test"])
+  # iex> Example message: test
+  # iex> PID....
+
+#+END_SRC
+
+The spawn function can receive either an anonymous function, or a module name, the function name as an atom, and a list of the arguments.
+
+The self function returns the current process PID.
+
+The receive function works the same way as the case expression, pattern matching on the messages in the mailbox.
+
+The send function receives a PID for the process to send, and the message itself.
+
+#+BEGIN_SRC elixir
+  defmodule Test do
+    def pass() do
+      receive do
+        {sender, message} ->
+          send(sender, {:answer, "Received: " <> message})
+      end
+    end
+  end
+#+END_SRC
+
+* Receiving details
+  - Messages are stored in the order they come
+  - The oldest message is first. It is tested against the first pattern
+  - If it is matched, the body of the pattern is executed
+  - If it does not, next pattern is processed
+  - Should none of the patterns match, next message is processed
+  - If none of the messages match none of the patterns, the process is suspended until it receives next message. The old ones are still in the mailbox
+
+* Homework
+  #+BEGIN_SRC elixir
+  defmodule ReceiveExample do
+  def loop do
+    receive do
+      {:test, text} -> IO.puts("received " <> text)
+    end
+  end
+end
+# TODO new type of message - :foo
+# TODO default clause - catch all, toest :)
+# TODO be able to receive unlimited messages
+# TODO return a message
+  #+END_SRC
