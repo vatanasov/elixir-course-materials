@@ -47,15 +47,15 @@ The send function receives a PID for the process to send, and the message itself
 
 * Homework
   #+BEGIN_SRC elixir
-  defmodule ReceiveExample do
+defmodule ReceiveExample do
   def loop do
     receive do
       {:test, text} -> IO.puts("received " <> text)
     end
   end
 end
-# TODO new type of message - :foo
-# TODO default clause - catch all, toest :)
+# TODO new type of message - :foo, (only the atom :foo), which after being received prints "Done the first task"
+# TODO default clause - catch all, toest :) and prints "Done the second task"
 # TODO be able to receive unlimited messages
 # TODO return a message
   #+END_SRC
