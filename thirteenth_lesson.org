@@ -1,0 +1,30 @@
+* Links
+** spawn_link
+   #+BEGIN_SRC elixir
+     spawn_link(fn -> 1 + 1 end)
+     spawn_link(fn -> raise("Testing errors") end)
+     spawn_link(fn -> 1 = 2 end)
+   #+END_SRC
+
+** Exercises 
+   - Why did the second one crashed it?
+   - Why do you think the first spawn_link didn't crash the calling process?
+   - Why did the third one crashed it?
+   - Create a linked process, that is alive, and crash the IEx session. Did that crash the linked process?
+   - Why do you think it behaves like that?
+
+** Trapping exits
+   #+BEGIN_SRC elixir
+     Process.flag(:trap_exit, true)
+     spawn_link(fn -> 1 + 1 end)
+     spawn_link(fn -> raise("Testing errors") end)
+   #+END_SRC
+
+** Exercises
+   - Create a Refrigerator module, that has a function start/0, which spawns a process, that is responsible for handling a refrigerator;
+   - That process should hold the refrigerator state in the form of a Map;
+   - The process should be able to receive a message:
+     1. {:add, product, quantity}, which adds the quantity to the product in the refrigerator;
+     2. :status, which prints the current status of the refrigerator;
+     3. {:take, product, quantity}, which removes the quantity of the product from the refrigerator. The quantity in the refrigerator should not be able to become less than 0, and if the caller requires more quantity than the one in the refrigerator, it should just get all of the remaining;
+     4. Create functions for sending each of the messages.
