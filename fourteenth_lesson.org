@@ -1,0 +1,44 @@
+* GenServer
+#+BEGIN_SRC elixir
+  defmodule StateCalculator do
+    use GenServer
+
+    def init(initial_value) do
+      {:ok, initial_value}
+    end
+
+    def handle_call({:add, number}, _from, current_number) do
+      new_number = current_number + number
+      {:reply, new_number, new_number}
+    end
+  end
+
+
+  iex> {:ok, pid} = GenServer.start(StateCalculator, 0)
+  iex> GenServer.call(pid, {add, 1})
+  ### 1
+#+END_SRC
+
+#+BEGIN_SRC elixir
+  def handle_cast({:add, number}, current_number) do
+    {:noreply, current_number + number}
+  end
+
+  def handle_call(:status, _from, current_number) do
+    {:reply, current_number, current_number}
+  end
+
+  iex> {:ok, pid} = GenServer.start(StateCalculator, 0)
+  iex> GenServer.cast(pid, {add, 1})
+  iex> GenServer.call(pid, :status)
+  ### 1
+#+END_SRC
+
+** Exercises
+   - Create additional functions for handling subtraction, multiplication and division;
+   - Create additional function, that receives a message in the form of {:transform, function}, and applies the function on the number;
+   - Create additional function, that receives a message in the form of {:print, function}, that returns the number with the function applied on it (without changing the state).
+
+
+** Homework
+   Recreate the task from the previous lesson (the refrigerator one) with a GenServer.
