@@ -72,5 +72,7 @@
      - Write a recursive definition, that calculates the sum of list of integers. E.g. if you pass it [1, 2, 3, 4], it should return 10
      - Write a recursive definition of "length/1" (the function that calculates the length of a list)
 * Homework
-     - Write a recursive function, that calculates the sum of all even items in a list (to compute the remainder of an integer division, you can use the function rem/2)
-     - Write a recursive function, that takes a list of strings, and return the uppercase version of all the strings, that start with "a" (case-insensitive)
+     - Write a recursive function, that calculates the sum of all even items in a list 
+(to compute the remainder of an integer division, you can use the function rem/2)
+     - Write a recursive function, that takes a list of strings, and return the uppercase 
+version of all the strings, that start with "a" (case-insensitive)
