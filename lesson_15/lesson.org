@@ -1,0 +1,33 @@
+** Exercises
+   - create a GenServer, that will hold a simple movie database;
+   - every movie will be represented by a Map, that has the following keys:
+     * :id - consecutive number, starting from 0;
+     * :name - String, the name of the movie;
+     * :genre - String;
+     * :actors - a list of names of actors, represented by a string
+     * :year - Integer;
+     * :rating - Float;
+   - The movies themselves will be stored in a list;
+   - The Genserver should handle a message in the form of 
+     * {:add, <movie>}, that adds a movie to the database;
+       - the id should be added automatically. Every new movie added, should have the id;
+       - the first id will be 1;
+     * {:by_id, <id>}, that finds a movie, based on the id;
+     * {:newer_than, <year>}, that returns all movies, newer than a particular year;
+     * {:older_than, <year>}, that returns all movies, older than a particular year;
+     * {:genre, <genre>}, that returns all moves from that genre;
+     * {:remove, <id>}, that removes the movie with that id from the database;
+     * {:by_name, <part_of_name>}, that searches a movie, containing a string in its name (case insensitive);
+     * {:actor, <actor>}, that returns all movies in which the actor participates
+** Naming of processes
+   #+BEGIN_SRC elixir
+     iex> {:ok, pid} = GenServer.start_link(Refrigerator, %{}, name: :refrigerator)
+     iex> GenServer.call(:refrigerator, {:add, :tomato, 10})
+   #+END_SRC
+*** Exercises
+    - Name the process with the movie DB.
+
+** Making interface functions
+
+*** Exercises
+    - Create interface functions for all the types of messages
