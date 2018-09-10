@@ -1,0 +1,21 @@
+* Supervisors
+
+You can create new projects with using the "--sup" flag
+
+#+BEGIN_SRC bash
+  mix new <name-of-project> --sup
+#+END_SRC
+
+That would generate a structure, that is ready to supervise processes. It will have an "application.ex" file, that will contain an empty list named "children", in which you can include your processes, that you want supervised. This would call the "start_link" function of each of the children, and if one of them dies, they would be restarted. 
+
+** Exercises 
+   - Create a supervised function of the Movies process from the previous lesson.
+
+* Restart strategies
+There are several restart strategies:
+  - :one_for_one - if a server dies, it is restarted;
+  - :one_for_all - if a server dies, all the other servers under that supervisor are killed, and then all of them are restarted;
+  - :rest_for_one - if a server dies, the children that follows the dead one in the list of children are killed and then restarted.
+
+** Exercises
+   - Think of a way to restore the state of the movie database, even if the server dies;
