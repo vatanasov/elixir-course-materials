@@ -1,0 +1,30 @@
+* Tasks and Agents
+** Tasks
+   Tasks are implemented with Genservers, for the single purpose of doing some operations (without having state)
+   #+BEGIN_SRC elixir
+     a_task = Task.async(fn -> 2 * 2 end)
+     IO.puts("doing something else")
+     result = Task.await(a_task)
+     IO.inspect(a_task)
+   #+END_SRC
+
+*** Exercises
+    - Create a module, with a function, that calculates the factorial. Use the function in another module, using Tasks
+    - Create a function, that calculates the factorials of a list of numbers, using the Task module
+    - Replace the factorial, with a new parameter to the function, which is the function, that would be issued
+
+** Agents
+   Agents are the opposite of tasks - they just hold state, without doing modifications
+   #+BEGIN_SRC elixir
+     {:ok, number_agent} = Agent.start(fn -> 0 end)
+     Agent.get(number_agent, fn number -> number end)
+     Agent.get(number_agent, fn number -> number + 2 end)
+     Agent.update(number_agent, fn number -> number + 2 end)
+     Agent.get(number_agent, fn number -> number end)
+   #+END_SRC
+
+*** Exercises
+    - Create a module, Calculator, that does addition, multiplication, subtraction, division, and holds the state in an Agent
+    - Make it, so that every operation is performed in a Task
+    - Make the "id" from the movie database task held in an Agent
+    - Make the backup from the previous exercise hold in an Agent
