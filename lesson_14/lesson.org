@@ -15,7 +15,7 @@
 
 
   iex> {:ok, pid} = GenServer.start(StateCalculator, 0)
-  iex> GenServer.call(pid, {add, 1})
+  iex> GenServer.call(pid, {:add, 1})
   ### 1
 #+END_SRC
 
@@ -29,7 +29,7 @@
   end
 
   iex> {:ok, pid} = GenServer.start(StateCalculator, 0)
-  iex> GenServer.cast(pid, {add, 1})
+  iex> GenServer.cast(pid, {:add, 1})
   iex> GenServer.call(pid, :status)
   ### 1
 #+END_SRC
